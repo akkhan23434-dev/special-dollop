@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Eid Mubarak, My Love | Eternal Eid Gift</title>
+  <!-- Google Fonts: Elegant Cursive + Modern Serif -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(circle at 10% 20%, #0a0a1a, #000000);
+      font-family: 'Inter', sans-serif;
+      color: #f5edf0;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* floating particles canvas */
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Glassmorphism core */
+    .glass-card {
+      background: rgba(20, 12, 28, 0.45);
+      backdrop-filter: blur(14px);
+      border-radius: 2rem;
+      border: 1px solid rgba(255, 215, 150, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 200, 100, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.4s;
+    }
+
+    .glass-card:hover {
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 200, 120, 0.4);
+      transform: translateY(-3px);
+    }
+
+    section {
+      margin-bottom: 6rem;
+      scroll-margin-top: 2rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      background: radial-gradient(ellipse at 30% 40%, rgba(30, 12, 40, 0.5), transparent);
+      border-radius: 3rem;
+    }
+
+    .hero h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4.5rem;
+      font-weight: normal;
+      background: linear-gradient(135deg, #FFE6B0, #E6B87E, #F8C471);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 12px rgba(255, 200, 100, 0.5);
+      margin-bottom: 1rem;
+      animation: softGlow 2.5s infinite alternate;
+    }
+
+    .hero p {
+      font-size: 1.35rem;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      color: #F3E5D8;
+      max-width: 650px;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      padding: 0.8rem 1.8rem;
+      border-radius: 60px;
+      display: inline-block;
+    }
+
+    /* floating elements container */
+    .floating-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .moon {
+      position: absolute;
+      top: 15%;
+      right: 8%;
+      font-size: 5rem;
+      filter: drop-shadow(0 0 12px gold);
+      animation: floatMoon 8s infinite ease-in-out;
+    }
+
+    .stars i, .lantern i {
+      position: absolute;
+      opacity: 0.8;
+    }
+
+    .star {
+      color: #FFF7E8;
+      text-shadow: 0 0 6px #FFD966;
+    }
+
+    .lantern {
+      color: #FFB347;
+      filter: drop-shadow(0 0 6px orange);
+    }
+
+    .heart-float {
+      position: absolute;
+      color: #ff99cc;
+      font-size: 1.5rem;
+      animation: floatHeart 4s linear infinite;
+      opacity: 0.7;
+    }
+
+    /* Memory timeline */
+    .timeline-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .memory-card {
+      background: rgba(25, 18, 35, 0.65);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      padding: 1.8rem;
+      width: 260px;
+      text-align: center;
+      border-left: 4px solid #e5b86b;
+      transition: all 0.3s;
+    }
+
+    .memory-card i {
+      font-size: 2.5rem;
+      color: #f1c38f;
+      margin-bottom: 1rem;
+    }
+
+    .memory-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #ffdfb3;
+    }
+
+    .memory-card p {
+      font-size: 0.9rem;
+      color: #e2cfd4;
+      margin-top: 0.5rem;
+    }
+
+    /* love letter styling */
+    .love-letter {
+      padding: 2.8rem 2rem;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .love-letter h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: #F2D9BB;
+      margin-bottom: 1rem;
+    }
+
+    .letter-content {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      line-height: 1.65;
+      font-weight: 400;
+      color: #f7ede8;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 1.5rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(255, 210, 120, 0.4);
+    }
+
+    /* interactive button */
+    .btn-love {
+      background: linear-gradient(145deg, #3f2a3e, #231b2c);
+      border: 1px solid rgba(230, 190, 110, 0.7);
+      color: #ffecb3;
+      font-size: 1.6rem;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      cursor: pointer;
+      font-family: 'Great Vibes', cursive;
+      transition: all 0.25s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      backdrop-filter: blur(4px);
+      margin: 1rem auto;
+      display: inline-block;
+      width: auto;
+    }
+
+    .btn-love:hover {
+      transform: scale(1.02);
+      background: linear-gradient(145deg, #553b53, #2d1f2b);
+      box-shadow: 0 0 20px rgba(255, 190, 70, 0.5);
+      border-color: #ffd27a;
+    }
+
+    /* popup modal */
+    .popup-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      background: rgba(20, 12, 30, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 2rem 2.5rem;
+      border-radius: 2rem;
+      border: 1px solid #ffcf8a;
+      box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 30px rgba(255,200,100,0.4);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      text-align: center;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      color: #ffddb0;
+    }
+
+    .popup-message.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup-message i {
+      font-size: 3rem;
+      color: #ff8cb0;
+    }
+
+    /* music section */
+    .music-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1.5rem 2rem;
+      margin-top: 1rem;
+    }
+
+    .music-btn {
+      background: none;
+      border: 1px solid rgba(240, 190, 100, 0.8);
+      padding: 0.8rem 1.5rem;
+      border-radius: 60px;
+      color: #ffdfb3;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.2s;
+      backdrop-filter: blur(8px);
+      font-weight: 500;
+    }
+
+    .music-btn i {
+      margin-right: 8px;
+    }
+
+    .final-message {
+      text-align: center;
+      padding: 2rem;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem;
+      background: rgba(0,0,0,0.3);
+      border-radius: 4rem;
+      margin-top: 2rem;
+    }
+
+    /* animations */
+    @keyframes softGlow {
+      0% { text-shadow: 0 0 3px #ffd58c; opacity: 0.95; }
+      100% { text-shadow: 0 0 20px #ffbc6e, 0 0 5px gold; opacity: 1; }
+    }
+
+    @keyframes floatMoon {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(3deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    @keyframes floatHeart {
+      0% { transform: translateY(0) scale(0.9); opacity: 0.8; }
+      100% { transform: translateY(-120px) scale(1.3); opacity: 0; }
+    }
+
+    /* responsive */
+    @media (max-width: 720px) {
+      .hero h1 { font-size: 2.8rem; }
+      .hero p { font-size: 1rem; }
+      .memory-card { width: 220px; }
+      .letter-content { font-size: 1.1rem; }
+      .final-message { font-size: 1.4rem; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 1rem; }
+      .btn-love { font-size: 1.2rem; padding: 0.7rem 1.3rem; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    a {
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<div class="container">
+  <!-- Hero Section -->
+  <section class="hero glass-card" style="padding: 3rem 1.5rem; overflow: hidden;">
+    <div class="floating-elements">
+      <div class="moon"><i class="fas fa-moon"></i></div>
+      <!-- dynamic stars & lanterns via JS but also static fallback -->
+      <div class="star" style="top: 20%; left: 5%; font-size: 1.5rem;"><i class="fas fa-star"></i></div>
+      <div class="star" style="top: 65%; left: 85%; font-size: 1.2rem;"><i class="fas fa-star"></i></div>
+      <div class="lantern" style="bottom: 15%; left: 12%; font-size: 2rem;"><i class="fas fa-lantern"></i></div>
+      <div class="lantern" style="top: 40%; right: 15%; font-size: 1.8rem;"><i class="fas fa-lantern"></i></div>
+    </div>
+    <h1>Eid Mubarak My Love ❤️</h1>
+    <p>Maybe I can’t give the most expensive Eidi, but I made this only for you.</p>
+    <div style="margin-top: 2rem;">
+      <span style="font-size: 2rem; filter: drop-shadow(0 0 6px pink);">✨🌙✨</span>
+    </div>
+  </section>
+
+  <!-- Love Letter Section -->
+  <section>
+    <div class="glass-card love-letter">
+      <h2>To the Keeper of My Heart</h2>
+      <div class="letter-content">
+        <p>My dearest love, on this blessed Eid, my soul whispers your name with every beat. 
+        You are the golden light in my darkest nights, the soft breeze that carries my prayers. 
+        I fall in love with you not just for your beauty, but for how you make everything feel like poetry. 
+        Thank you for every laugh, every embrace, and every silent understanding. 
+        You are Allah’s greatest gift to me — and loving you is my favorite act of worship. 
+        Eid Mubarak, my moon and stars. 🤍</p>
+        <p style="margin-top: 1rem; font-style: italic;">Forever yours, <span style="font-family: 'Great Vibes'; font-size: 1.8rem;">Your soulmate</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Memory Timeline -->
+  <section>
+    <div style="text-align: center; margin-bottom: 1.5rem;">
+      <h2 style="font-family: 'Great Vibes'; font-size: 2.8rem; color: #F2D9BB;">🌙 Our Golden Moments 🌙</h2>
+    </div>
+    <div class="timeline-grid">
+      <div class="memory-card glass-card">
+        <i class="fas fa-calendar-heart"></i>
+        <h3>The day we met</h3>
+        <p>Eyes locked, universe paused — and I knew my world shifted forever.</p>
+      </div>
+      <div class="memory-card glass-card">
+        <i class="fas fa-comment-dots"></i>
+        <h3>Our favorite conversation</h3>
+        <p>Under the starlit sky, talking until dawn — our souls undressed and in love.</p>
+      </div>
+      <div class="memory-card glass-card">
+        <i class="fas fa-heartbeat"></i>
+        <h3>The moment I realized I love you</h3>
+        <p>When you smiled at something silly, my heart whispered: 'She is everything'.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Button Section -->
+  <section style="text-align: center;">
+    <div class="glass-card" style="display: inline-block; padding: 2rem 3rem; width: auto; margin: 0 auto;">
+      <button id="loveButton" class="btn-love"><i class="fas fa-heart"></i> Click if you love me 😳</button>
+    </div>
+  </section>
+
+  <!-- Music Section -->
+  <section>
+    <div class="glass-card music-card">
+      <span style="font-size: 1.2rem;"><i class="fas fa-headphones-alt"></i> Romantic Eid melody</span>
+      <button id="toggleMusicBtn" class="music-btn"><i class="fas fa-play"></i> Play Background Music</button>
+    </div>
+  </section>
+
+  <!-- Final Section -->
+  <section>
+    <div class="glass-card final-message">
+      <i class="fas fa-moon" style="margin-right: 10px;"></i> You are my favorite Eidi from Allah 🌙❤️
+    </div>
+  </section>
+  <footer>
+    made with infinite love & devotion — Eid Mubarak, my queen ✨
+  </footer>
+</div>
+
+<!-- Hidden Audio Element -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+  Your browser does not support the audio element. (Romantic instrumental would play)
+</audio>
+
+<script>
+  (function() {
+    // ---------- PARTICLES SYSTEM (floating glow particles) ----------
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let particles = [];
+
+    function resizeCanvas() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 3 + 1.2;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.2 + 0.1;
+        this.color = `rgba(255, 215, 150, ${Math.random() * 0.5 + 0.15})`;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = '#ffcf7a';
+        ctx.fill();
+      }
+    }
+
+    function initParticles(count = 80) {
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+    }
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+      for (let p of particles) {
+        p.update();
+        p.draw();
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    initParticles(100);
+    animateParticles();
+
+    // floating hearts animation (create dynamic heart elements in hero and background)
+    function createFloatingHearts() {
+      const heroSection = document.querySelector('.hero');
+      if (!heroSection) return;
+      setInterval(() => {
+        const heart = document.createElement('i');
+        heart.classList.add('fas', 'fa-heart', 'heart-float');
+        const leftPos = Math.random() * 90 + 5; // % width
+        const duration = Math.random() * 4 + 3;
+        heart.style.left = leftPos + '%';
+        heart.style.bottom = '-20px';
+        heart.style.fontSize = Math.random() * 25 + 15 + 'px';
+        heart.style.position = 'absolute';
+        heart.style.animation = `floatHeart ${duration}s linear forwards`;
+        heart.style.zIndex = '5';
+        heart.style.opacity = Math.random() * 0.6 + 0.3;
+        heart.style.color = `rgb(255, ${Math.floor(150 + Math.random() * 105)}, 180)`;
+        heroSection.appendChild(heart);
+        setTimeout(() => {
+          if(heart && heart.remove) heart.remove();
+        }, duration * 1000);
+      }, 1800);
+    }
+
+    // add many stars/lanterns dynamic for luxury feel
+    function addExtraMagic() {
+      const floatingDiv = document.querySelector('.floating-elements');
+      if(floatingDiv) {
+        for(let i=0; i<30; i++) {
+          const starSpan = document.createElement('i');
+          starSpan.className = 'fas fa-star star';
+          starSpan.style.position = 'absolute';
+          starSpan.style.top = Math.random() * 100 + '%';
+          starSpan.style.left = Math.random() * 100 + '%';
+          starSpan.style.fontSize = Math.random() * 20 + 8 + 'px';
+          starSpan.style.opacity = Math.random() * 0.7 + 0.2;
+          starSpan.style.animation = `softGlow ${Math.random() * 2 + 1}s infinite alternate`;
+          floatingDiv.appendChild(starSpan);
+        }
+        for(let i=0; i<6; i++) {
+          const lamp = document.createElement('i');
+          lamp.className = 'fas fa-lantern lantern';
+          lamp.style.position = 'absolute';
+          lamp.style.bottom = Math.random() * 30 + 5 + '%';
+          lamp.style.left = Math.random() * 90 + 5 + '%';
+          lamp.style.fontSize = Math.random() * 28 + 20 + 'px';
+          lamp.style.filter = 'drop-shadow(0 0 6px #FFB347)';
+          lamp.style.opacity = 0.7;
+          floatingDiv.appendChild(lamp);
+        }
+      }
+    }
+
+    // ----- Interactive Button with cute popup -----
+    const loveBtn = document.getElementById('loveButton');
+    const popup = document.createElement('div');
+    popup.className = 'popup-message';
+    popup.innerHTML = `<i class="fas fa-heart-broken" style="margin-right: 10px;"></i> I knew it 💖<br><span style="font-size: 1.2rem;">You just made my Eid complete ✨</span>`;
+    document.body.appendChild(popup);
+
+    function showPopup() {
+      popup.classList.add('show');
+      setTimeout(() => {
+        popup.classList.remove('show');
+      }, 2800);
+    }
+    if(loveBtn) {
+      loveBtn.addEventListener('click', () => {
+        showPopup();
+        // extra spark effect: create few floating hearts
+        for(let i=0;i<12;i++) {
+          const burstHeart = document.createElement('i');
+          burstHeart.className = 'fas fa-heart';
+          burstHeart.style.position = 'fixed';
+          burstHeart.style.left = loveBtn.getBoundingClientRect().left + loveBtn.clientWidth/2 + 'px';
+          burstHeart.style.top = loveBtn.getBoundingClientRect().top + loveBtn.clientHeight/2 + 'px';
+          burstHeart.style.color = '#ffb7c5';
+          burstHeart.style.fontSize = '20px';
+          burstHeart.style.pointerEvents = 'none';
+          burstHeart.style.zIndex = '2000';
+          burstHeart.style.opacity = '0.9';
+          document.body.appendChild(burstHeart);
+          let angle = Math.random() * 2 * Math.PI;
+          let velocity = Math.random() * 80 + 20;
+          let vx = Math.cos(angle) * velocity;
+          let vy = Math.sin(angle) * velocity - 50;
+          let posX = parseFloat(burstHeart.style.left);
+          let posY = parseFloat(burstHeart.style.top);
+          let opacity = 1;
+          function animateHeartBurst() {
+            posX += vx * 0.02;
+            posY += vy * 0.02;
+            vy += 1.5;
+            opacity -= 0.02;
+            burstHeart.style.left = posX + 'px';
+            burstHeart.style.top = posY + 'px';
+            burstHeart.style.opacity = opacity;
+            if(opacity <= 0 || posY > window.innerHeight + 100) {
+              if(burstHeart && burstHeart.remove) burstHeart.remove();
+              return;
+            }
+            requestAnimationFrame(animateHeartBurst);
+          }
+          requestAnimationFrame(animateHeartBurst);
+          setTimeout(() => { if(burstHeart && burstHeart.remove) burstHeart.remove(); }, 1800);
+        }
+      });
+    }
+
+    // ----- Music Section with toggle -----
+    const music = document.getElementById('bgMusic');
+    const toggleBtn = document.getElementById('toggleMusicBtn');
+    let isPlaying = false;
+    // small fallback: in some browsers autoplay policy, we set user interaction needed
+    if(toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        if(!isPlaying) {
+          music.play().then(() => {
+            isPlaying = true;
+            toggleBtn.innerHTML = '<i class="fas fa-pause"></i> Pause Music';
+          }).catch(e => {
+            console.log("Audio play failed", e);
+            alert("Click again to allow background music (browser policy) ♪");
+            
